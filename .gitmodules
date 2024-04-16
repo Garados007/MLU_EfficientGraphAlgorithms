@@ -13,3 +13,6 @@
 [submodule "third-party/cmake/sanitizers"]
 	path = third-party/cmake/sanitizers
 	url = https://github.com/arsenm/sanitizers-cmake
+[submodule "third-party/antlr4"]
+	path = third-party/antlr4
+	url = https://github.com/antlr/antlr4.git
