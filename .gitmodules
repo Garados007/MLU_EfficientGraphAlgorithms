@@ -1,3 +1,6 @@
 [submodule "third-party/cmake/CreateLaunchers"]
 	path = third-party/cmake/CreateLaunchers
 	url = https://github.com/caseymcc/CreateLaunchers.git
+[submodule "third-party/fmt"]
+	path = third-party/fmt
+	url = https://github.com/fmtlib/fmt.git
