@@ -1,0 +1,3 @@
+[submodule "third-party/cmake/CreateLaunchers"]
+	path = third-party/cmake/CreateLaunchers
+	url = https://github.com/caseymcc/CreateLaunchers.git
