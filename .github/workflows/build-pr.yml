@@ -1,0 +1,69 @@
+name: Build Pull Request
+run-name: Build PR ${{ github.event.number }} «${{ github.event.pull_request.title }}» (${{ github.actor}})
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  PreCommit:
+    name: Runs pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pre-commit-ci/lite-action@v1.0.2
+        if: always()
+
+  Build:
+    name: Build on ${{ matrix.os }} (${{ matrix.type }})
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+          # - macos-latest
+        type:
+          - Release
+          - Debug
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: adopt
+      - name: Create project
+        run: |
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ matrix.type }} -DBUILD_TESTING=ON -DEGA_WARNINGS_AS_ERRORS=ON
+      - name: Compile
+        run: |
+          cmake --build build --config ${{ matrix.type }}
+      - name: Test
+        run: |
+          ctest --test-dir build -C ${{ matrix.type }} --output-on-failure
+      - name: Generate a code coverage report
+        uses: threeal/gcovr-action@v1.0.0
+        with:
+          excludes: |
+            build/*
+            src/main.cpp
+            test/*
+            third-party/*
+          xml-out: coverage.xml
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: Build-${{ matrix.os }}-${{ matrix.type }}-assets
+          path: |
+            build/ega
+            build/${{ matrix.type }}/ega.exe
+            build/${{ matrix.type }}/ega.pdb
+            coverage
+            cobertura.xml
+          if-no-files-found: error

@@ -1,0 +1,5 @@
+#include <git_version.hpp>
+
+const std::string_view GIT_REVISION = "@GIT_REVISION@";
+
+const std::string_view BUILD_YEAR = "@BUILD_YEAR@";

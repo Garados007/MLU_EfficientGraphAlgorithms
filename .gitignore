@@ -1,0 +1,4 @@
+# ignore any build directory
+/build*
+# ignore any temporary directories
+.antlr
