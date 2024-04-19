@@ -1,0 +1,27 @@
+Checks: '*,
+        -readability-implicit-bool-conversion,
+        -google-runtime-references,
+        -fuchsia-default-arguments,
+        -fuchsia-default-arguments-calls,
+        -fuchsia-default-arguments-declarations,
+        -cppcoreguidelines-pro-type-reinterpret-cast,
+        -clang-diagnostic-missing-prototypes,
+        -llvm-header-guard,
+        -cppcoreguidelines-macro-usage,
+        -clang-diagnostic-unused-macros,
+        -modernize-use-trailing-return-type,
+        -clang-diagnostic-signed-enum-bitfield,
+        -cppcoreguidelines-avoid-non-const-global-variables,
+        -llvmlibc-restrict-system-libc-headers,
+        -llvmlibc-callee-namespace,
+        -llvmlibc-implementation-in-namespace,
+        -misc-no-recursion,
+        -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+        -hicpp-no-array-decay,
+        -readability-use-anyofallof,
+        -readability-convert-member-functions-to-static,
+        -altera*,
+        -misc-include-cleaner'
+
+FormatStyle: 'file'
+WarningsAsErrors: '*'
